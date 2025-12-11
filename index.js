@@ -168,11 +168,10 @@ app.post('/create-payment-intent', verifyFirebaseToken, async (req, res) => {
         const { plan } = req.body;
         const userEmail = req.user.email;
 
-        // Plan configuration (amounts in cents)
         const plans = {
-            '1 minute': { amount: 10 },    // $0.10
-            '5 days': { amount: 500 },     // $5.00  
-            '10 days': { amount: 800 }     // $8.00
+            '1 minute': { amount: 10 },
+            '5 days': { amount: 500 },
+            '10 days': { amount: 800 }
         };
 
         const selectedPlan = plans[plan];
@@ -180,7 +179,7 @@ app.post('/create-payment-intent', verifyFirebaseToken, async (req, res) => {
             return res.status(400).json({ message: 'Invalid plan' });
         }
 
-        // Create PaymentIntent
+
         const paymentIntent = await stripe.paymentIntents.create({
             amount: selectedPlan.amount,
             currency: 'usd',
@@ -854,8 +853,7 @@ app.get('/my-article/:id', verifyFirebaseToken, async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
-// plans
-// Fix the plans route - you're missing parentheses
+// Plans Route
 app.get("/plans", async (req, res) => {
     try {
         const result = await plansCollection.find().toArray(); // Added ()
