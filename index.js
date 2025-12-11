@@ -169,7 +169,7 @@ app.post('/create-payment-intent', verifyFirebaseToken, async (req, res) => {
         const userEmail = req.user.email;
 
         const plans = {
-            '1 minute': { amount: 10 },
+            '1 minute': { amount: 50 },
             '5 days': { amount: 500 },
             '10 days': { amount: 800 }
         };
